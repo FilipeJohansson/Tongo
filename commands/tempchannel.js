@@ -26,8 +26,7 @@ module.exports = {
                     message.guild.channels.create("Canais Temporários", {
                         type: 'category',
                     }).then(async (channel) => {
-                        const category = await message.guild.channels.cache.find(c => c.name == "Canais Temporários" && c.type == "category");
-                        const categoryId = category.id;
+                        const categoryId = channel;
 
                         const newData = new Data({
                             channelName: "TempCategory",
@@ -40,8 +39,7 @@ module.exports = {
                         }).then(async (channel) => {
                             channel.setParent(categoryId);
                             
-                            const voice = await message.guild.channels.cache.find(c => c.name == "➕ Criar novo canal" && c.type == "voice");
-                            const voiceId = voice.id;
+                            const voiceId = channel;
 
                             const newData = new Data({
                                 channelName: "TempVoice",
