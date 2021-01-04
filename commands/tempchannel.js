@@ -26,7 +26,7 @@ module.exports = {
                     message.guild.channels.create("Canais Temporários", {
                         type: 'category',
                     }).then(async (channel) => {
-                        const categoryId = channel;
+                        const categoryId = channel.id;
 
                         const newData = new Data({
                             channelName: "TempCategory",
@@ -39,7 +39,7 @@ module.exports = {
                         }).then(async (channel) => {
                             channel.setParent(categoryId);
                             
-                            const voiceId = channel;
+                            const voiceId = channel.id;
 
                             const newData = new Data({
                                 channelName: "TempVoice",
@@ -49,24 +49,6 @@ module.exports = {
 
                             
                         });
-        
-                    /*message.guild.channels.create("New Category", {
-                        type: 'category',
-                    }).then(async (channel) => {
-                        const category = await message.guild.channels.cache.find(c => c.name == "New Category" && c.type == "category");
-                        const categoryId = category.id;
-        
-                        message.guild.channels.create("New Text Channel", {
-                            type: 'text',
-                        }).then((channel) => {
-                            channel.setParent(categoryId);
-                        });
-        
-                        message.guild.channels.create("New Voice Channel", {
-                            type: 'voice',
-                        }).then((channel) => {
-                            channel.setParent(categoryId);
-                        });*/
                     });
                 } else {
                     return message.channel.send(`Os canais temporários já estão ativados.`);
@@ -75,7 +57,43 @@ module.exports = {
 
            
         } else if(args[0] === 'false') {
-            message.channel.send("False");
+            Data.findOne({
+                channelName: "TempCategory"
+            }, async (err, data) => {
+                if(err) console.log(err);
+                if(!data) {
+                    return message.channel.send(`Os canais temporários não estão ativados.`);
+                } else {
+                    const channelToDelete = message.guild.channels.cache.get(data.channelID);
+
+                    await Data.findOne({
+                        channelName: "TempVoice"
+                    }, (err, data) => {
+                        if(err) console.log(err);
+                        if(data) {
+                            const voiceChannelToDelete = message.guild.channels.cache.get(data.channelID);
+                            
+                            if(voiceChannelToDelete.delete()) {
+                                Data.deleteMany({
+                                    channelName: "TempVoice"
+                                }, (err, data) => {
+                                    if(err) console.log(err);
+                                });
+                            }
+                        }
+                    });
+
+                    if(channelToDelete.delete()) {
+                        Data.deleteMany({
+                            channelName: "TempCategory"
+                        }, (err, data) => {
+                            if(err) console.log(err);
+                        });
+                    }
+
+                    message.channel.send(`Os canais temporários foram desativados.`);
+                }
+            });
         } else {
             message.channel.send("Você não digitou um argumento válido.");
         }
