@@ -13,7 +13,7 @@ const Data = require("../models/tempchannels.js");
 module.exports = {
 	name: 'tempchannel',
     description: 'Cria um servidor.',
-    alias: 'temp',
+    aliases: ['temp'],
     args: true,
 	async execute(message, args) {
         if (args[0] === 'true') {
@@ -22,7 +22,6 @@ module.exports = {
             }, (err, data) => {
                 if(err) console.log(err);
                 if(!data) {
-
                     message.guild.channels.create("Canais Temporários", {
                         type: 'category',
                     }).then(async (channel) => {
@@ -46,9 +45,9 @@ module.exports = {
                                 channelID: voiceId,
                             })
                             newData.save().catch(err => console.log(err));
-
-                            
                         });
+
+                        return message.channel.send(`Os canais temporários foram ativados.`); 
                     });
                 } else {
                     return message.channel.send(`Os canais temporários já estão ativados.`);
@@ -91,11 +90,11 @@ module.exports = {
                         });
                     }
 
-                    message.channel.send(`Os canais temporários foram desativados.`);
+                    return message.channel.send(`Os canais temporários foram desativados.`);
                 }
             });
         } else {
-            message.channel.send("Você não digitou um argumento válido.");
+            return message.channel.send("Você não digitou um argumento válido.");
         }
 	},
 };
