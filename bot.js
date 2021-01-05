@@ -57,7 +57,7 @@ client.on('message', async message => {
         }
     }
 
-    if (command && !args.length) {        
+    if (command.args && !args.length) {        
         let reply = `Você não colocou nenhum argumento, ${message.author}!`;
 
         if (command.usage) {
