@@ -10,7 +10,5 @@
 
 ## Comandos:
 ### Musica:
-Tongo!music play
-
-### Andamento:
-Reestruturando os subcomandos.
+Tongo!music play http://URL.com
+Tongo!music skip

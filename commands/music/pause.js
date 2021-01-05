@@ -1,11 +1,10 @@
 module.exports = {
 	name: 'play',
     description: 'Toca a música.',
-    args: true,
+    args: false,
     guildOnly: true,
-    usage: ['<URL>'],
     permissions: 'ADMINISTRATOR',
 	async execute(message, args) {
-        console.log("Play alcançado");
+        console.log("Pause alcançado");
     }
 }
