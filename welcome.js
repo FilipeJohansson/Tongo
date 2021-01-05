@@ -28,7 +28,6 @@ module.exports = async (client) => {
             if(err) console.log(err);
             else {
                 welcomeChannelID = data.channelID;
-                console.log(welcomeChannelID);
             }
         });
 
@@ -100,9 +99,9 @@ module.exports = async (client) => {
 
         embed = new MessageEmbed()
             .setColor([155, 31, 196])
-            .setDescription("Bem-vindo ao servidor **🕹 Jogar Jojinhos**," + `${member}!`)
+            .setDescription("Bem-vindo ao servidor **🕹 Jogar Jojinhos**, " + `${member}!`)
             .addField('Por favor, leia os canais abaixo', `${rulesChannel}` + " \u200B " + `${doubtsChannel}`)
-            .addField('Canais úteis', `${geralChannel}` + " \u200B " + `${memesChannel}`)
+            .addField('Veja também os canais úteis', `${geralChannel}` + " \u200B " + `${memesChannel}`)
             .addField('\u200B', '\u200B')
             .addField('Parceiros', `${partnershipChannel}`, true)
             .addField('Link do Discord', `${linkChannel}`, true)

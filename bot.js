@@ -15,8 +15,6 @@ const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('
 
 client.on('ready', () => {
     console.log("Bot connected");
-    
-    createCategory(client);
 
     // Welcomer listenner 
     welcome(client);
@@ -28,18 +26,20 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-//console.log(client);
+//console.log(client.commands);
 
-function createCategory() {
-    //console.log(client.users);
-}
+//console.log(client);
 
 // --> On message
 client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const commandName = args.shift().toLowerCase();
+    // message.content = Tongo!welcome SetChannel #👋▸boas-vindas
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    // args = [welcome, SetChannel, #👋▸boas-vindas]
+    const commandName = args.shift().toLowerCase();
+    // commandName = [welcome]
+    // args = [SetChannel, #👋▸boas-vindas]
 
     const command = client.commands.get(commandName) 
         || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
@@ -57,7 +57,7 @@ client.on('message', async message => {
         }
     }
 
-    if (command.args && !args.length) {        
+    if (command && !args.length) {        
         let reply = `Você não colocou nenhum argumento, ${message.author}!`;
 
         if (command.usage) {
@@ -97,7 +97,6 @@ client.on('message', async message => {
 });
 
 // --> ERRORS TRACKING
-
 client.on('shardError', error => {
     console.error('A websocket connection encountered an error:', error);
 });
