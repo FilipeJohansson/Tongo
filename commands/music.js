@@ -18,7 +18,6 @@ module.exports = {
     args: true,
     guildOnly: true,
     usage: ['play <URL>', 'pause'],
-    permissions: 'ADMINISTRATOR',
 	async execute(message, args) {
         // message.content = Tongo!music play URL
         // args = [play, URL]

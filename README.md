@@ -6,7 +6,8 @@
 - Mongoose
 - 
 
-
+## Acesso:
+https://discord.com/oauth2/authorize?client_id=794623908300980254&scope=bot
 
 ## Comandos:
 ### Musica:
@@ -15,3 +16,17 @@ Tongo!music skip
 
 
 Canal de Rádio?
+
+
+## Alterações?
+Jogar o codigo que conecta com o banco nos sets do welcome para um arquivo separado. 
+Chamar este arquivo nos sets e enviar os dados via parâmetro.
+
+### Possibilidade de criar mais de um canal temporário?
+- tempchannel new [nome do canal]
+- tempchannel delete [nome do canal]
+- tempchannel true 
+- - somente permite a criação dos canais temporários, não cria um canal.
+- Trocar o deleteMany() por delete()
+- Trocar a busca de channelName para channelID
+
