@@ -17,7 +17,15 @@ module.exports = {
     description: 'Configurações do chat de boas vindas.',
     args: true,
     guildOnly: true,
-    usage: ['setchannel <#canal>', 'setruleschannel <#canal>'],
+    usage: [
+        'setchannel <#canal>', 
+        'setruleschannel <#canal>', 
+        'setdoubtschannel <#canal>', 
+        'setgeralchannel <#canal>', 
+        'setmemeschannel <#canal>', 
+        'setpartnershipchannel <#canal>', 
+        'setlinkchannel <#canal>'
+    ],
     permissions: 'ADMINISTRATOR',
 	async execute(message, args) {
         // message.content = Tongo!welcome SetChannel #👋▸boas-vindas
