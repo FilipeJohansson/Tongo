@@ -33,6 +33,17 @@ module.exports = {
         if (!subCommand) return;
 
         // nem todos subCommands precisam de argumento
+        if(subCommand.args){
+            if (!args.length) {        
+                let reply = `Você não colocou nenhum argumento, ${message.author}!`;
+        
+                if (subCommand.usage) {
+                    reply += `\nO uso apropriado deve ser: \`${subCommand.usage.join(', ')}\``;
+                }
+        
+                return message.channel.send(reply);
+            }
+        }
         
         try {
             subCommand.execute(message, args);

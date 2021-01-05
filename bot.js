@@ -32,7 +32,20 @@ for (const file of commandFiles) {
 
 // --> On message
 client.on('message', async message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    
+    /**
+    massage.reply(message.content);
+    console.log(massage.content);
+    //bot entra?
+    if (message.content === '/join') {
+        // Only try to join the sender's voice channel if they are in one themselves
+        if (message.member.voice.channel) {
+          const connection = await message.member.voice.channel.join();
+        } else {
+          message.reply('You need to join a voice channel first!');
+        }
+      } */
 
     // message.content = Tongo!welcome SetChannel #👋▸boas-vindas
     const args = message.content.slice(prefix.length).trim().split(/ +/);

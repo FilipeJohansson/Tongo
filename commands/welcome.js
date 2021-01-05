@@ -30,7 +30,7 @@ module.exports = {
     
         if (!subCommand) return;
 
-        if (subCommand && !args.length) {        
+        if (!args.length) { 
             let reply = `Você não colocou nenhum argumento, ${message.author}!`;
     
             if (subCommand.usage) {
