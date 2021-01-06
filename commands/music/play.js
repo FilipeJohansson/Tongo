@@ -1,7 +1,10 @@
 const { DiscordAPIError } = require("discord.js");
 
 const Discord = require('discord.js');
+const { connection } = require("mongoose");
 const dispatcher = Discord.StreamDispatcher;
+
+const ytdl = require('ytdl-core');
 
 module.exports = {
 	name: 'play',
@@ -22,12 +25,12 @@ module.exports = {
             return message.reply("Eu não tenho permissão para entrar e falar nesse canal");
         }
 
-        console.log(args);
+        channelVoice.join()
+            .then(connection => {
+                connection.play(ytdl(`${args.toString()}`, { volume: 0.2, filter: 'audioonly' }));
 
-        const connection = await channelVoice.join();
-        const ytdl = require('ytdl-core');
-        connection.play(ytdl(`${args.toString()}`, { volume: 0.2, filter: 'audioonly' }));
+                message.channel.send(`Tocando ${args}`); 
+            });
 
-        message.channel.send(`Tocando ${args}`); 
     }
 }
