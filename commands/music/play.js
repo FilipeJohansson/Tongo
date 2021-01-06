@@ -1,9 +1,3 @@
-const { DiscordAPIError } = require("discord.js");
-
-const Discord = require('discord.js');
-const { connection } = require("mongoose");
-const dispatcher = Discord.StreamDispatcher;
-
 const ytdl = require('ytdl-core');
 
 module.exports = {
