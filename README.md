@@ -25,7 +25,7 @@ Canal de Rádio?
 Jogar o codigo que conecta com o banco nos sets do welcome para um arquivo separado. 
 Chamar este arquivo nos sets e enviar os dados via parâmetro.
 
-### Possibilidade de criar mais de um canal temporário?
+Possibilidade de criar mais de um canal temporário?
 - tempchannel new [nome do canal]
 - tempchannel delete [nome do canal]
 - tempchannel true 
@@ -33,5 +33,5 @@ Chamar este arquivo nos sets e enviar os dados via parâmetro.
 - Trocar o deleteMany() por delete()
 - Trocar a busca de channelName para channelID
 
-- Rádio
+Rádio
 

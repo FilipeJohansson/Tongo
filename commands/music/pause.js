@@ -5,13 +5,13 @@ module.exports = {
     guildOnly: true,
     permissions: 'ADMINISTRATOR',
 	async execute(message, args) {
-        console.log("Pause alcançado");
-
         //Verificar se o bot está tocando no canal
-        if(true){
-            //console.log(message.client.bot);
-            //console.debug(client.bot);
-            console.debug(user.bot);
-        }
+        
+        const channelVoice = message.member.voice.channel;
+        //console.log(channelVoice);
+        const connection = channelVoice.join();
+        const dispatcher = connection.play();
+        dispatcher.pause();
+        console.log(connection);
     }
 }

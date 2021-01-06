@@ -20,10 +20,14 @@ module.exports = {
         }
 
         channelVoice.join()
-            .then(connection => {
-                connection.play(ytdl(`${args.toString()}`, { volume: 0.2, filter: 'audioonly' }));
+            .then(async connection => {
+                const dispatcher = connection.play(ytdl(`${args.toString()}`, { volume: 0.2, filter: 'audioonly' }));
+                //dispatcher.pause();
 
-                message.channel.send(`Tocando ${args}`); 
+                const songInfo = await ytdl.getInfo(args.toString());
+                message.channel.send(`Tocando **${songInfo.videoDetails.title}**`); 
+
+                //message.channel.send(`Tocando ${args}`);
             });
 
     }
