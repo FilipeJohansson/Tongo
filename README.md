@@ -1,10 +1,13 @@
 # Tongo
 
 ## Ambiente: 
-- NodeJS v14.15.3
-- DiscordJS
-- Mongoose
-- 
+- NodeJS v14.15.3 (https://nodejs.org/en/)
+- DiscordJS (npm install discord.js)
+- Mongoose (npm install mongoose)
+- FFmpeg (npm install ffmpeg-static)
+- opus encoder (npm install @discordjs/opus)
+- ytdl-core (npm install ytdl-core)
+
 
 ## Acesso:
 https://discord.com/oauth2/authorize?client_id=794623908300980254&scope=bot
@@ -29,4 +32,6 @@ Chamar este arquivo nos sets e enviar os dados via parâmetro.
 - - somente permite a criação dos canais temporários, não cria um canal.
 - Trocar o deleteMany() por delete()
 - Trocar a busca de channelName para channelID
+
+- Rádio
 
