@@ -43,6 +43,8 @@ module.exports = {
             queue.set(message.guild.id, queueContruct);
 
             queueContruct.songs.push(song);
+            console.log("queueContruct: ");
+            console.log(queueContruct.songs);
 
             try{
                 var connection = await channelVoice.join();
@@ -64,11 +66,14 @@ module.exports = {
         } else {
             serverQueue.songs.push(song);
             message.channel.send(`**${songInfo.videoDetails.title}** adicionado a fila!`);
+            console.log("Server Queue ELSE: ");
+            console.log(serverQueue.songs);
         }
 
-        function play(guild, song) {
+        async function play(guild, song) {
             const serverQueue = queue.get(guild.id);
-            console.log(serverQueue);
+            console.log("Server Queue 1 play: ");
+            console.log(serverQueue.songs);
         
             if (!song) {
               serverQueue.channelVoice.leave();
@@ -77,15 +82,18 @@ module.exports = {
             }
         
             const dispatcher = serverQueue.connection
-            .play(ytdl(`${args.toString()}`, { volume: 0.2, filter: 'audioonly' }))
-            .on("finish", () => {
-              serverQueue.songs.pop();
-              play(guild, serverQueue.songs[0]);
+            .play(ytdl(song.url, { volume: 0.2, filter: 'audioonly' }))
+            .on("finish", async () => {
+                console.log("Finished");
+                await serverQueue.songs.shift();
+                console.log("serverQueue shift[0]:");
+                console.log(serverQueue.songs[0]);
+                play(guild, serverQueue.songs[0]);
             })
             .on("error", error => console.error(error));
 
             dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-            serverQueue.textChannel.send(`Começando a tocar: **${songInfo.videoDetails.title}**`);
+            serverQueue.textChannel.send(`Começando a tocar: **${song.title}**`);
         }
         
 
