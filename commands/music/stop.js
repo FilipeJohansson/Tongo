@@ -3,7 +3,6 @@ module.exports = {
     description: 'Para de tocar música.',
     args: false,
     guildOnly: true,
-    permissions: 'ADMINISTRATOR',
 	async execute(message, args) {
         const channelVoice = message.member.voice;
         if (!channelVoice) 

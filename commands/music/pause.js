@@ -3,7 +3,6 @@ module.exports = {
     description: 'Pausa a música.',
     args: false,
     guildOnly: true,
-    permissions: 'ADMINISTRATOR',
 	async execute(message, args) {
         const serverQueue = message.client.queue.get(message.guild.id);
 

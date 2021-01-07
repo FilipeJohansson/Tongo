@@ -18,6 +18,11 @@ https://discord.com/oauth2/authorize?client_id=794623908300980254&scope=bot
 Tongo!music play http://URL.com
 Tongo!music skip
 Tongo!music pause
+Tongo!music resume
+Tongo!music queue
+Tongo!music next
+Tongo!music stop
+
 
 
 

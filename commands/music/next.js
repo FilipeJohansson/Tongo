@@ -3,7 +3,6 @@ module.exports = {
     description: 'Passa para a próxima música.',
     args: false,
     guildOnly: true,
-    permissions: 'ADMINISTRATOR',
 	execute(message, args) {
         const channelVoice = message.member.voice;
         if (!channelVoice) 
