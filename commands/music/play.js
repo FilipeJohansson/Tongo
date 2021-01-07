@@ -1,4 +1,7 @@
+const { Util } = require("discord.js");
+
 const ytdl = require('ytdl-core');
+const yts = require("yt-search");
 
 module.exports = {
   name: 'play',
@@ -19,15 +22,51 @@ module.exports = {
             return message.reply("Eu não tenho permissão para entrar e falar nesse canal");
         }
 
-        const serverQueue = message.client.queue.get(message.guild.id);
-        const songInfo = await ytdl.getInfo(args.toString());
+        const searchString = args.join(" ");
 
-        // para ficar na fila se necessário
-        const song = {
-            title: songInfo.videoDetails.title,
-            url: songInfo.videoDetails.video_url,
-            playing: true,
-        };
+        if (!searchString)
+            return message.reply("Você não me disse o que devo tocar");
+
+        const url = args[0] ? args[0].replace(/<(.+)>/g, "$1") : "";
+
+        let songInfo = null;
+        let song = null;
+
+        if (url.match(/^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi)) {
+            try {
+                songInfo = await ytdl.getInfo(url);
+
+                if(!songInfo)
+                    return message.channel.send("Não consegui achar o link enviado");
+
+                song = {
+                    title: songInfo.videoDetails.title,
+                    url: songInfo.videoDetails.video_url,
+                    playing: true,
+                };
+            } catch (err) {
+                console.error(err);
+            }
+            
+        } else {
+            try {
+                const searchedVideos = await yts.search(searchString);
+                if(searchedVideos.videos.length === 0)
+                    return message.channel.send("Não consegui achar esta música no YouTube");
+
+                songInfo = searchedVideos.videos[0];
+
+                song = {
+                    title: Util.escapeMarkdown(songInfo.title),
+                    url: songInfo.url,
+                    playing: true,
+                };
+            } catch(err) {
+                console.error(err);
+            }
+        }
+
+        const serverQueue = message.client.queue.get(message.guild.id);
 
         if(!serverQueue){
             const queueContruct = {

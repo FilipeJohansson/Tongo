@@ -7,6 +7,7 @@
 - FFmpeg (npm install ffmpeg-static)
 - opus encoder (npm install @discordjs/opus)
 - ytdl-core (npm install ytdl-core)
+- yt-search (npm install yt-search)
 
 
 ## Acesso:
