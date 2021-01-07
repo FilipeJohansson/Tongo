@@ -17,18 +17,37 @@ https://discord.com/oauth2/authorize?client_id=794623908300980254&scope=bot
 
 ### Musica:
 Tongo!music play http://URL.com
+
 Tongo!music skip
+
 Tongo!music pause
+
 Tongo!music resume
+
 Tongo!music queue
+
 Tongo!music next
+
 Tongo!music stop
 
+### Welcome
+setchannel <#canal>
+
+setruleschannel <#canal>
+
+setdoubtschannel <#canal>
+
+setgeralchannel <#canal>
+
+setmemeschannel <#canal>
+
+setpartnershipchannel <#canal>
+
+setlinkchannel <#canal>
 
 
 
-
-## Alterações?
+## Futuras Alterações?
 Jogar o codigo que conecta com o banco nos sets do welcome para um arquivo separado. 
 Chamar este arquivo nos sets e enviar os dados via parâmetro.
 
