@@ -29,6 +29,8 @@ Tongo!music stop
 
 
 ## Alterações?
+Ideias para alterações posteriores
+
 Jogar o codigo que conecta com o banco nos sets do welcome para um arquivo separado. 
 Chamar este arquivo nos sets e enviar os dados via parâmetro.
 
