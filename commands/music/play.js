@@ -1,7 +1,5 @@
 const ytdl = require('ytdl-core');
 
-const queue = new Map();
-
 module.exports = {
   name: 'play',
   description: 'Toca a música.',
@@ -21,13 +19,14 @@ module.exports = {
             return message.reply("Eu não tenho permissão para entrar e falar nesse canal");
         }
 
-        const serverQueue = queue.get(message.guild.id);
+        const serverQueue = message.client.queue.get(message.guild.id);
         const songInfo = await ytdl.getInfo(args.toString());
 
         // para ficar na fila se necessário
         const song = {
             title: songInfo.videoDetails.title,
             url: songInfo.videoDetails.video_url,
+            playing: true,
         };
 
         if(!serverQueue){
@@ -40,11 +39,9 @@ module.exports = {
                 playing: true
             };
 
-            queue.set(message.guild.id, queueContruct);
+            message.client.queue.set(message.guild.id, queueContruct);
 
             queueContruct.songs.push(song);
-            console.log("queueContruct: ");
-            console.log(queueContruct.songs);
 
             try{
                 var connection = await channelVoice.join();
@@ -56,38 +53,29 @@ module.exports = {
                 queueContruct.connection = connection;
                 play(message.guild, queueContruct.songs[0]);
 
-                message.channel.send(`Tocando **${songInfo.videoDetails.title}**`); 
-
             } catch (err) {
                 console.log(err);
-                queue.delete(message.guild.id);
+                message.client.queue.delete(message.guild.id);
                 return message.channel.send("Não foi possível tocar");
             }
         } else {
             serverQueue.songs.push(song);
             message.channel.send(`**${songInfo.videoDetails.title}** adicionado a fila!`);
-            console.log("Server Queue ELSE: ");
-            console.log(serverQueue.songs);
         }
 
         async function play(guild, song) {
-            const serverQueue = queue.get(guild.id);
-            console.log("Server Queue 1 play: ");
-            console.log(serverQueue.songs);
+            const serverQueue = message.client.queue.get(guild.id);
         
             if (!song) {
               serverQueue.channelVoice.leave();
-              queue.delete(guild.id);
+              message.client.queue.delete(guild.id);
               return;
             }
         
             const dispatcher = serverQueue.connection
             .play(ytdl(song.url, { volume: 0.2, filter: 'audioonly' }))
             .on("finish", async () => {
-                console.log("Finished");
                 await serverQueue.songs.shift();
-                console.log("serverQueue shift[0]:");
-                console.log(serverQueue.songs[0]);
                 play(guild, serverQueue.songs[0]);
             })
             .on("error", error => console.error(error));
