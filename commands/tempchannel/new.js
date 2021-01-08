@@ -19,6 +19,10 @@ module.exports = {
     permissions: 'ADMINISTRATOR',
 	async execute(message, args) {        
 
+        console.log("antes verf " + message.client.tempchannel);
+        if(message.client.tempChannel == '0') {
+            return message.reply(`a criação de canais temporários está desativada.`);
+        }
         // Lista de Maps: client.tempChannels
 
         let tempChannelId = args[0];

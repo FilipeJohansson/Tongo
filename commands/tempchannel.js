@@ -28,79 +28,18 @@ module.exports = {
     aliases: ['temp'],
     args: true,
 	async execute(message, args) {
-        const subCommandName = args.shift().toLowerCase();
-        //args = URL
-        //subCommandName = play
-
-        const subCommand = subCommands.get(subCommandName) 
-        || subCommands.find(cmd => cmd.aliases && cmd.aliases.includes(subCommandName));
-    
-        if (!subCommand) return message.reply(`O uso apropriado deve ser: \`${subCommand.usage.join(', ')}\``);;
-
-        // nem todos subCommands precisam de argumento
-        if(subCommand.args){
-            if (!args.length) {        
-                let reply = `Você não colocou nenhum argumento, ${message.author}!`;
-        
-                if (subCommand.usage) {
-                    reply += `\nO uso apropriado deve ser: \`${subCommand.usage.join(', ')}\``;
-                }
-        
-                return message.channel.send(reply);
-            }
-        }
-        
-        try {
-            subCommand.execute(message, args);
-        } catch (error) {
-            console.error(error);
-            message.reply('houve um erro ao tentar executar este comando!');
-        }
-
-
 
         if (args[0] === 'true') {
-            
-
-            Data.findOne({
-                channelName: "TempCategory"
-            }, (err, data) => {
-                if(err) console.log(err);
-                if(!data) {
-                    message.guild.channels.create("Canais Temporários", {
-                        type: 'category',
-                    }).then(async (channel) => {
-                        const categoryId = channel.id;
-
-                        const newData = new Data({
-                            channelName: "TempCategory",
-                            channelID: categoryId,
-                        })
-                        newData.save().catch(err => console.log(err));
-        
-                        message.guild.channels.create("➕ Criar novo canal", {
-                            type: 'voice',
-                        }).then(async (channel) => {
-                            channel.setParent(categoryId);
-                            
-                            const voiceId = channel.id;
-
-                            const newData = new Data({
-                                channelName: "TempVoice",
-                                channelID: voiceId,
-                            })
-                            newData.save().catch(err => console.log(err));
-                        });
-
-                        return message.channel.send(`Os canais temporários foram ativados.`); 
-                    });
-                } else {
-                    return message.channel.send(`Os canais temporários já estão ativados.`);
-                }
-            });
-
+            message.client.tempchannel = '1';
+            console.log("apos true " + message.client.tempchannel);
+            return message.reply('criação de canais ativada!');
            
         } else if(args[0] === 'false') {
+            message.client.tempchannel = '0';
+            return message.reply('criação de canais desativada!');
+
+            /*
+            // Código que deletava todos os canais temporarios
             Data.findOne({
                 channelName: "TempCategory"
             }, async (err, data) => {
@@ -137,7 +76,37 @@ module.exports = {
 
                     return message.channel.send(`Os canais temporários foram desativados.`);
                 }
-            });
+            });*/
         }
+
+        const subCommandName = args.shift().toLowerCase();
+        //args = URL
+        //subCommandName = play
+        
+        const subCommand = subCommands.get(subCommandName) 
+        || subCommands.find(cmd => cmd.aliases && cmd.aliases.includes(subCommandName));
+    
+        if (!subCommand) return message.reply(`O uso apropriado deve ser: \`${subCommand.usage.join(', ')}\``);;
+
+        // nem todos subCommands precisam de argumento
+        if(subCommand.args){
+            if (!args.length) {        
+                let reply = `Você não colocou nenhum argumento, ${message.author}!`;
+        
+                if (subCommand.usage) {
+                    reply += `\nO uso apropriado deve ser: \`${subCommand.usage.join(', ')}\``;
+                }
+        
+                return message.channel.send(reply);
+            }
+        }
+        
+        try {
+            subCommand.execute(message, args);
+        } catch (error) {
+            console.error(error);
+            message.reply('houve um erro ao tentar executar este comando!');
+        }
+
 	},
 };

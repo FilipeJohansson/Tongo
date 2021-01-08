@@ -47,7 +47,7 @@ setlinkchannel <#canal>
 #### em () => já feito (ou quase)
 
 Possibilidade de criar mais de um canal temporário?
-- (tempchannel new [nome do canal])
+- tempchannel new [nome do canal] >> *problema na variavel que verifica se é possivel criar canais*
 - tempchannel delete [nome do canal]
 - tempchannel true 
 - - somente permite a criação dos canais temporários, não cria um canal.
