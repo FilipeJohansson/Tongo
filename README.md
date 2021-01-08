@@ -68,3 +68,5 @@ Geral
 - - name, description, args, guildOnly, usage, permissions, cooldown, aliases
 - Rádio
 - Checar a possibilidade de envio de logs de erro para um local centralizado
+- Criar embeded para cada fala do bot
+- Arquivo único com a lista de strings do bot
