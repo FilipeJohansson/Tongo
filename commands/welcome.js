@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 
-const subCommandFiles = fs.readdirSync('./commands/welcomeSub').filter(file => file.endsWith('.js'));
+const subCommandFiles = fs.readdirSync('./commands/welcome').filter(file => file.endsWith('.js'));
 
 const subCommands = new Discord.Collection();
 
 for (const file of subCommandFiles) {
-    const subCommand = require(`./welcomeSub/${file}`);
+    const subCommand = require(`./welcome/${file}`);
 	subCommands.set(subCommand.name, subCommand);
 }
 
@@ -36,7 +36,7 @@ module.exports = {
         const subCommand = subCommands.get(subCommandName) 
         || subCommands.find(cmd => cmd.aliases && cmd.aliases.includes(subCommandName));
     
-        if (!subCommand) return;
+        if (!subCommand) return message.reply('este comando não existe!');;
 
         if (!args.length) { 
             let reply = `Você não colocou nenhum argumento, ${message.author}!`;

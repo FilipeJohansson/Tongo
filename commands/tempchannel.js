@@ -17,6 +17,8 @@ module.exports = {
     args: true,
 	async execute(message, args) {
         if (args[0] === 'true') {
+            
+
             Data.findOne({
                 channelName: "TempCategory"
             }, (err, data) => {

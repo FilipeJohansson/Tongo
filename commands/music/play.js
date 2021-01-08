@@ -8,7 +8,7 @@ module.exports = {
   description: 'Toca a música.',
   args: true,
   guildOnly: true,
-  usage: ['<URL>'],
+  usage: ['[YT_URL/nome da música]'],
 	async execute(message, args) {
         //Achar o canal de voz:
         const channelVoice = message.member.voice.channel;

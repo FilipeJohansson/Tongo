@@ -43,8 +43,6 @@ setpartnershipchannel <#canal>
 
 setlinkchannel <#canal>
 
-
-
 ## Futuras Alterações?
 
 Possibilidade de criar mais de um canal temporário?
@@ -55,5 +53,18 @@ Possibilidade de criar mais de um canal temporário?
 - Trocar o deleteMany() por delete()
 - Trocar a busca de channelName para channelID
 
-Rádio
+Canais Temporários
+- Pegar somente o primeiro argumento (arg[0]) de tempchannel, music e welcome.
+- - Hoje está pegando todos os argumentos, pode dar problema
 
+Músicas
+- Verificar usages
+
+Welcome
+- Validar sub-comandos (mensagem de erro usages)
+
+Geral
+- Verificar atributos dos comandos
+- - name, description, args, guildOnly, usage, permissions, cooldown, aliases
+- Rádio
+- Checar a possibilidade de envio de logs de erro para um local centralizado
