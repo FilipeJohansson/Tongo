@@ -3,7 +3,7 @@ module.exports = {
     description: 'Passa para a próxima música.',
     args: false,
     guildOnly: true,
-	execute(message, args) {
+	async execute(message, args) {
         const channelVoice = message.member.voice;
         if (!channelVoice) 
             return message.channel.send('Você precisa estar em um canal de voz para usar esse comando');
@@ -12,8 +12,10 @@ module.exports = {
         if (!serverQueue) 
             return message.channel.send('Não há nenhuma música tocando.');
 
-        if (!serverQueue.playing)            
-			return message.channel.send('Você não pode passar uma música pausada.');
+        if (!serverQueue.playing) {
+            await serverQueue.connection.dispatcher.resume();
+            serverQueue.connection.dispatcher.end();
+        }
         
         serverQueue.connection.dispatcher.end();
         

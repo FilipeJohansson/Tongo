@@ -11,6 +11,8 @@ module.exports = {
             serverQueue.connection.dispatcher.resume();
             
 			return message.channel.send('Voltando a tocar a música');
+		} else if (serverQueue.playing) {
+			return message.channel.send('A música já está tocando.');
 		}
 		return message.channel.send('Não há nenhuma música tocando.');
     }
