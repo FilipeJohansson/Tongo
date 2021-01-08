@@ -21,7 +21,7 @@ module.exports = {
         const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
         
         if (!command) {
-            return message.reply('este não é um comando válido');
+            return message.reply('Este não é um comando válido');
         }
         
         data.push(`**Nome: ** ${command.name}`);
