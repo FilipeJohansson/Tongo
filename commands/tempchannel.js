@@ -1,3 +1,15 @@
+const Discord = require('discord.js');
+const fs = require('fs');
+
+const subCommandFiles = fs.readdirSync('./commands/tempchannel').filter(file => file.endsWith('.js'));
+
+const subCommands = new Discord.Collection();
+
+for (const file of subCommandFiles) {
+    const subCommand = require(`./tempchannel/${file}`);
+	subCommands.set(subCommand.name, subCommand);
+}
+
 const mongoose = require("mongoose"); 
 require("dotenv").config();
 
@@ -16,6 +28,37 @@ module.exports = {
     aliases: ['temp'],
     args: true,
 	async execute(message, args) {
+        const subCommandName = args.shift().toLowerCase();
+        //args = URL
+        //subCommandName = play
+
+        const subCommand = subCommands.get(subCommandName) 
+        || subCommands.find(cmd => cmd.aliases && cmd.aliases.includes(subCommandName));
+    
+        if (!subCommand) return message.reply(`O uso apropriado deve ser: \`${subCommand.usage.join(', ')}\``);;
+
+        // nem todos subCommands precisam de argumento
+        if(subCommand.args){
+            if (!args.length) {        
+                let reply = `Você não colocou nenhum argumento, ${message.author}!`;
+        
+                if (subCommand.usage) {
+                    reply += `\nO uso apropriado deve ser: \`${subCommand.usage.join(', ')}\``;
+                }
+        
+                return message.channel.send(reply);
+            }
+        }
+        
+        try {
+            subCommand.execute(message, args);
+        } catch (error) {
+            console.error(error);
+            message.reply('houve um erro ao tentar executar este comando!');
+        }
+
+
+
         if (args[0] === 'true') {
             
 

@@ -9,6 +9,7 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
 client.queue = new Map();
+client.tempChannels = new Map();
 
 const cooldowns = new Discord.Collection();
 
