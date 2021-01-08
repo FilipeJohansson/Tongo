@@ -3,6 +3,7 @@
 ## Ambiente: 
 - NodeJS v14.15.3 (https://nodejs.org/en/)
 - DiscordJS (npm install discord.js)
+- Mocha (global: npm install mocha -g; local:npm install mocha --save-dev)
 - Mongoose (npm install mongoose)
 - FFmpeg (npm install ffmpeg-static)
 - opus encoder (npm install @discordjs/opus)
