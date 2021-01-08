@@ -26,7 +26,7 @@ module.exports = {
         let voiceId = null;
 
         Data.findOne({
-            tempChannelId: tempChannelId
+            tempChannelId: tempChannelId.toString()
         }, (err, data) => {
             if(err) console.log(err);
             if(!data) {
@@ -47,10 +47,13 @@ module.exports = {
                             voiceId: voiceId,
                         };
 
-                        const tempChannel = message.client.tempChannels.set(tempChannelId, tempChannelConstruct);
+                        message.client.tempChannels.set(tempChannelId, tempChannelConstruct);
+
+                        const tempChannel = message.client.tempChannels.get(tempChannelId);
 
                         const newData = new Data({
-                            tempChannelId: tempChannel,
+                            tempChannelId: tempChannelId,
+                            tempChannelMap: tempChannel,
                         })
                         newData.save().catch(err => console.log(err));
                     });

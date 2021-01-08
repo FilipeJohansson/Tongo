@@ -44,9 +44,10 @@ setpartnershipchannel <#canal>
 setlinkchannel <#canal>
 
 ## Futuras Alterações?
+#### em () => já feito (ou quase)
 
 Possibilidade de criar mais de um canal temporário?
-- tempchannel new [nome do canal]
+- (tempchannel new [nome do canal])
 - tempchannel delete [nome do canal]
 - tempchannel true 
 - - somente permite a criação dos canais temporários, não cria um canal.
@@ -54,8 +55,9 @@ Possibilidade de criar mais de um canal temporário?
 - Trocar a busca de channelName para channelID
 
 Canais Temporários
-- Pegar somente o primeiro argumento (arg[0]) de tempchannel, music e welcome.
-- - Hoje está pegando todos os argumentos, pode dar problema
+- Pegar somente o primeiro argumento (arg[0]) de tempchannel, music e welcome;
+- - Hoje está pegando todos os argumentos, pode dar problema.
+- Verificar se um canal foi deletado do servidor, verificar se existe em banco e deletar em banco também.
 
 Músicas
 - Verificar usages

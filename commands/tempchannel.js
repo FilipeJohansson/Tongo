@@ -138,8 +138,6 @@ module.exports = {
                     return message.channel.send(`Os canais temporários foram desativados.`);
                 }
             });
-        } else {
-            return message.channel.send("Você não digitou um argumento válido.");
         }
 	},
 };
