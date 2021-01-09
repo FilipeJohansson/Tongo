@@ -3,6 +3,7 @@
 ## Ambiente: 
 - NodeJS v14.15.3 (https://nodejs.org/en/)
 - DiscordJS (npm install discord.js)
+- Mocha (global: npm install mocha -g; local:npm install mocha --save-dev)
 - Mongoose (npm install mongoose)
 - FFmpeg (npm install ffmpeg-static)
 - opus encoder (npm install @discordjs/opus)
@@ -45,6 +46,9 @@ setlinkchannel <#canal>
 
 ## Futuras Alterações?
 #### em () => já feito (ou quase)
+
+Criar testes unitários automatizados?
+- criar servidor/estrutura de testes mockada?
 
 Possibilidade de criar mais de um canal temporário?
 - tempchannel new [nome do canal] >> *problema na variavel que verifica se é possivel criar canais*
