@@ -30,12 +30,11 @@ module.exports = {
 	async execute(message, args) {
 
         if (args[0] === 'true') {
-            message.client.tempchannel = '1';
-            console.log("apos true " + message.client.tempchannel);
+            message.client.allowTempChannel = true;
             return message.reply('criação de canais ativada!');
            
         } else if(args[0] === 'false') {
-            message.client.tempchannel = '0';
+            message.client.allowTempChannel = false;
             return message.reply('criação de canais desativada!');
 
             /*
