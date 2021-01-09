@@ -28,6 +28,8 @@ client.on('ready', () => {
     welcome(client);
 });
 
+//Mas que caraio, o bagulho não tava com meu e-mail
+
 client.once('reconnecting', () => {
 	console.log('Reconectando');
 });
