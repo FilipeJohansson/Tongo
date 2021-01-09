@@ -1,5 +1,5 @@
 module.exports = {
-    name: '',
+    name: 'tongo',
     description: 'Fala uma frase aleatória do Tongo',
     cooldown: 5,
     aliases: ['letongue'],

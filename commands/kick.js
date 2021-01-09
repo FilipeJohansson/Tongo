@@ -4,6 +4,7 @@ module.exports = {
 	guildOnly: true,
 	permissions: 'KICK_MEMBERS',
 	execute(message, args) {
+		console.log(message.mentions.users);
 		if (!message.mentions.users.size) {
 			return message.reply('Você precisa especificar quem você gostaria de expulsar!');
 		}
