@@ -51,12 +51,12 @@ Criar testes unitários automatizados?
 - criar servidor/estrutura de testes mockada?
 
 Possibilidade de criar mais de um canal temporário?
-- tempchannel new [nome do canal] >> *problema na variavel que verifica se é possivel criar canais*
-- tempchannel delete [nome do canal]
-- tempchannel true 
-- - somente permite a criação dos canais temporários, não cria um canal.
-- Trocar o deleteMany() por delete()
-- Trocar a busca de channelName para channelID
+- (tempchannel new [nome do canal])
+- (tempchannel delete [nome do canal])
+- (tempchannel true)
+- - (somente permite a criação dos canais temporários, não cria um canal.)
+- (Trocar o deleteMany() por delete())
+- (Trocar a busca de channelName para channelID)
 
 Canais Temporários
 - Pegar somente o primeiro argumento (arg[0]) de tempchannel, music e welcome;
@@ -65,6 +65,7 @@ Canais Temporários
 
 Músicas
 - Verificar usages
+- Verificar se é um link do YT
 
 Welcome
 - Validar sub-comandos (mensagem de erro usages)

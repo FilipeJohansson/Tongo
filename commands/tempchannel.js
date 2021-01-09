@@ -1,16 +1,10 @@
 const Discord = require('discord.js');
+const mongoose = require("mongoose"); 
 const fs = require('fs');
 
 const subCommandFiles = fs.readdirSync('./commands/tempchannel').filter(file => file.endsWith('.js'));
-
 const subCommands = new Discord.Collection();
 
-for (const file of subCommandFiles) {
-    const subCommand = require(`./tempchannel/${file}`);
-	subCommands.set(subCommand.name, subCommand);
-}
-
-const mongoose = require("mongoose"); 
 require("dotenv").config();
 
 // Connect to database
@@ -20,62 +14,83 @@ mongoose.connect(process.env.MONGOPASS, {
 });
 
 // Models
-const Data = require("../models/tempchannels.js");
+const Data = require("../models/data.js");
+
+for (const file of subCommandFiles) {
+    const subCommand = require(`./tempchannel/${file}`);
+	subCommands.set(subCommand.name, subCommand);
+}
 
 module.exports = {
 	name: 'tempchannel',
     description: 'Cria um servidor.',
     aliases: ['temp'],
     args: true,
+    permissions: 'ADMINISTRATOR',
 	async execute(message, args) {
-
         if (args[0] === 'true') {
             message.client.allowTempChannel = true;
+
+            Data.findOne({
+                botToken: process.env.BOTTOKEN.toString()
+            }, (err, data) => {
+                if(err) console.log(err);
+                if(!data) {
+                    const newData = new Data({
+                        botToken: process.env.BOTTOKEN.toString(),
+                        allowTempChannel: message.client.allowTempChannel,
+                    })
+                    newData.save().catch(err => console.log(err));
+
+                } else {
+                    Data.deleteOne({
+                        botToken: process.env.BOTTOKEN.toString(),
+                    }, (err, data) => {
+                        if(err) console.log(err);
+                        if(!data) return message.channel.send(`Erro ao deletar dados.`);
+                    });
+
+                    const newData = new Data({
+                        botToken: process.env.BOTTOKEN.toString(),
+                        allowTempChannel: message.client.allowTempChannel,
+                    })
+                    newData.save().catch(err => console.log(err));
+                }
+            });
+
             return message.reply('criação de canais ativada!');
            
         } else if(args[0] === 'false') {
             message.client.allowTempChannel = false;
-            return message.reply('criação de canais desativada!');
 
-            /*
-            // Código que deletava todos os canais temporarios
             Data.findOne({
-                channelName: "TempCategory"
-            }, async (err, data) => {
+                botToken: process.env.BOTTOKEN.toString(),
+            }, (err, data) => {
                 if(err) console.log(err);
                 if(!data) {
-                    return message.channel.send(`Os canais temporários não estão ativados.`);
+                    const newData = new Data({
+                        botToken: process.env.BOTTOKEN.toString(),
+                        allowTempChannel: message.client.allowTempChannel,
+                    })
+                    newData.save().catch(err => console.log(err));
+    
                 } else {
-                    const channelToDelete = message.guild.channels.cache.get(data.channelID);
-
-                    await Data.findOne({
-                        channelName: "TempVoice"
+                    Data.deleteOne({
+                        botToken: process.env.BOTTOKEN.toString(),
                     }, (err, data) => {
                         if(err) console.log(err);
-                        if(data) {
-                            const voiceChannelToDelete = message.guild.channels.cache.get(data.channelID);
-                            
-                            if(voiceChannelToDelete.delete()) {
-                                Data.deleteMany({
-                                    channelName: "TempVoice"
-                                }, (err, data) => {
-                                    if(err) console.log(err);
-                                });
-                            }
-                        }
+                        if(!data) return message.channel.send(`Erro ao deletar dados.`);
                     });
 
-                    if(channelToDelete.delete()) {
-                        Data.deleteMany({
-                            channelName: "TempCategory"
-                        }, (err, data) => {
-                            if(err) console.log(err);
-                        });
-                    }
-
-                    return message.channel.send(`Os canais temporários foram desativados.`);
+                    const newData = new Data({
+                        botToken: process.env.BOTTOKEN.toString(),
+                        allowTempChannel: message.client.allowTempChannel,
+                    })
+                    newData.save().catch(err => console.log(err));
                 }
-            });*/
+            });
+
+            return message.reply('criação de canais desativada!');
         }
 
         const subCommandName = args.shift().toLowerCase();
@@ -106,6 +121,5 @@ module.exports = {
             console.error(error);
             message.reply('houve um erro ao tentar executar este comando!');
         }
-
 	},
 };

@@ -4,11 +4,11 @@ const ytdl = require('ytdl-core');
 const yts = require("yt-search");
 
 module.exports = {
-  name: 'play',
-  description: 'Toca a música.',
-  args: true,
-  guildOnly: true,
-  usage: ['[YT_URL/nome da música]'],
+    name: 'play',
+    description: 'Toca a música.',
+    args: true,
+    guildOnly: true,
+    usage: ['[YT_URL/nome da música]'],
 	async execute(message, args) {
         //Achar o canal de voz:
         const channelVoice = message.member.voice.channel;
