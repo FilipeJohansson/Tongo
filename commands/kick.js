@@ -5,7 +5,7 @@ module.exports = {
 	permissions: 'KICK_MEMBERS',
 	execute(message, args) {
 		if (!message.mentions.users.size) {
-			return message.reply('você precisa especificar quem você gostaria de expulsar!');
+			return message.reply('Você precisa especificar quem você gostaria de expulsar!');
 		}
 
 		const taggedUser = message.mentions.users.first();
