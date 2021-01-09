@@ -44,6 +44,14 @@ setpartnershipchannel <#canal>
 
 setlinkchannel <#canal>
 
+### Tempchannel
+Tongo!tempchannel \[true / false]
+
+Tongo!tempchannel new \[apelido]
+
+Tongo!tempchannel delete \[apelido]
+
+
 ## Futuras Alterações?
 #### em () => já feito (ou quase)
 
@@ -55,13 +63,7 @@ Possibilidade de criar mais de um canal temporário?
 - (tempchannel delete [nome do canal])
 - (tempchannel true)
 - - (somente permite a criação dos canais temporários, não cria um canal.)
-- (Trocar o deleteMany() por delete())
-- (Trocar a busca de channelName para channelID)
-
-Canais Temporários
-- Pegar somente o primeiro argumento (arg[0]) de tempchannel, music e welcome;
-- - Hoje está pegando todos os argumentos, pode dar problema.
-- Verificar se um canal foi deletado do servidor, verificar se existe em banco e deletar em banco também.
+- (Verificar se um canal foi deletado do servidor, verificar se existe em banco e deletar em banco também.)
 
 Músicas
 - Verificar usages
@@ -77,3 +79,5 @@ Geral
 - Checar a possibilidade de envio de logs de erro para um local centralizado
 - Criar embeded para cada fala do bot
 - Arquivo único com a lista de strings do bot
+- Pegar somente o primeiro argumento (arg[0]) de tempchannel, music e welcome;
+- - Hoje está pegando todos os argumentos, pode dar problema.
