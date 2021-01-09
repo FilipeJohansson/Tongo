@@ -8,7 +8,7 @@ mongoose.connect(process.env.MONGOPASS, {
 });
 
 // Models
-const Data = require("./models/data.js");
+const Data = require("./models/welcomeModel.js");
 
 const { MessageEmbed } = require("discord.js");
 

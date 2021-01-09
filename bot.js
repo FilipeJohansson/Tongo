@@ -8,17 +8,21 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-client.queue = new Map();
-client.tempChannels = new Map();
-client.allowTempChannel = false;
-
 const cooldowns = new Discord.Collection();
 
+client.queue = new Map();
+client.tempChannels = new Map();
+client.allowTempChannel = true;
+
 const welcome = require('./welcome');
+const setup = require('./setup.js');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 client.on('ready', () => {
     console.log("Conectado");
+    
+    // Setting up bot
+    setup(client);
 
     // Welcomer listenner 
     welcome(client);
