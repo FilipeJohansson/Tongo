@@ -29,7 +29,7 @@ module.exports = {
         const subCommand = subCommands.get(subCommandName) 
         || subCommands.find(cmd => cmd.aliases && cmd.aliases.includes(subCommandName));
     
-        if (!subCommand) return message.reply(`O uso apropriado deve ser: \`${subCommand.usage.join(', ')}\``);
+        if (!subCommand) return message.reply("este comando não existe, use o comando `help`.");
 
         // nem todos subCommands precisam de argumento
         if(subCommand.args){

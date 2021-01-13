@@ -13,7 +13,7 @@ module.exports = {
 
         embed = new MessageEmbed()
             .setColor([155, 31, 196])
-            .setTitle("Fila de músicas:")
+            .setTitle("Fila de músicas")
             .setDescription(`__Tocando agora:__
             [${serverQueue.songs[0].title}](${serverQueue.songs[0].url})\n
             __Músicas na fila:__            
@@ -22,6 +22,5 @@ module.exports = {
             .setThumbnail("https://media1.tenor.com/images/a51ea91ab28cef8aa211fdea29ae89d3/tenor.gif");
         return message.channel.send(embed);
 
-		//return message.channel.send(`__**Song queue:**__ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}**Now playing:** ${serverQueue.songs[0].title}`);
     }
 }
