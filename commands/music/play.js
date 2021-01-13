@@ -1,6 +1,5 @@
 const { Util } = require("discord.js");
 
-const ytdl = require('ytdl-core');
 const yts = require("yt-search");
 
 module.exports = {
@@ -41,16 +40,21 @@ module.exports = {
 
         if (url.match(/^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/)) {
             try {
-                songInfo = await ytdl.getInfo(url);
+                searchedVideos = await yts.search(url);
 
-                if(!songInfo)
+                if(!searchedVideos)
                     return message.channel.send("Não consegui achar nenhuma música.");
 
+                songInfo = searchedVideos.videos[0];
+
                 song = {
-                    title: songInfo.videoDetails.title,
-                    url: songInfo.videoDetails.video_url,
+                    title: Util.escapeMarkdown(songInfo.title),
+                    url: songInfo.url,
+                    time: songInfo.timestamp,
+                    thumbnail: songInfo.thumbnail,
                     playing: true,
                 };
+
             } catch (err) {
                 console.error(err);
             }
@@ -72,6 +76,8 @@ module.exports = {
                 song = {
                     title: Util.escapeMarkdown(songInfo.title),
                     url: songInfo.url,
+                    time: songInfo.timestamp,
+                    thumbnail: songInfo.thumbnail,
                     playing: true,
                 };
             } catch(err) {
