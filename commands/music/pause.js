@@ -4,7 +4,12 @@ module.exports = {
     args: false,
     guildOnly: true,
 	async execute(message, args) {
-        const serverQueue = message.client.queue.get(message.guild.id);
+		const channelVoice = message.member.voice;
+		const serverQueue = message.client.queue.get(message.guild.id);
+		
+		if(serverQueue)
+            if(serverQueue.channelVoice != channelVoice)
+                return message.reply("você está em um canal de voz diferente!");
 
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;

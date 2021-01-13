@@ -20,7 +20,7 @@ module.exports = {
 
         if(serverQueue)
             if(serverQueue.channelVoice != channelVoice)
-                return message.reply("Você está em um canal de voz diferente!");
+                return message.reply("você está em um canal de voz diferente!");
         
         //Ter acesso ao canal
         const permission = channelVoice.permissionsFor(message.client.user);
@@ -62,8 +62,6 @@ module.exports = {
                 message.channel.send(`:mag_right:  Procurando: **${searchString}**`);
 
                 const searchedVideos = await yts.search(searchString);
-
-                console.log(searchedVideos);
 
                 if(searchedVideos.videos.length === 0)
                     return message.channel.send("Não consegui achar esta música no YouTube");
