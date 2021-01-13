@@ -11,8 +11,6 @@ module.exports = {
         if (!serverQueue) 
             return message.channel.send('Não há nenhuma música tocando.');
 
-        console.log(serverQueue.songs.map(song => song.title).join('\n'));
-
         embed = new MessageEmbed()
             .setColor([155, 31, 196])
             .setTitle("Fila de músicas:")
