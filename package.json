@@ -16,6 +16,6 @@
     "mongoose": "^5.11.9",
     "node-fetch": "^2.6.1",
     "yt-search": "^2.5.1",
-    "ytdl-core": "^4.4.1"
+    "ytdl-core": "^4.4.3"
   }
 }

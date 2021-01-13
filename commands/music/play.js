@@ -12,9 +12,15 @@ module.exports = {
 	async execute(message, args) {
         //Achar o canal de voz:
         const channelVoice = message.member.voice.channel;
+        const serverQueue = message.client.queue.get(message.guild.id);
+
         if(!channelVoice)
             return message.reply("Você precisa estar em um canal de voz para usar esse comando");
         //console.log(channelVoice);
+
+        if(serverQueue)
+            if(serverQueue.channelVoice != channelVoice)
+                return message.reply("Você está em um canal de voz diferente!");
         
         //Ter acesso ao canal
         const permission = channelVoice.permissionsFor(message.client.user);
@@ -50,9 +56,13 @@ module.exports = {
             
         } else {
             try {
+                message.channel.send(`:mag_right:  Procurando: **${searchString}**`);
+
                 const searchedVideos = await yts.search(searchString);
                 if(searchedVideos.videos.length === 0)
                     return message.channel.send("Não consegui achar esta música no YouTube");
+
+                    //console.log(searchedVideos);
 
                 songInfo = searchedVideos.videos[0];
 
@@ -65,8 +75,6 @@ module.exports = {
                 console.error(err);
             }
         }
-
-        const serverQueue = message.client.queue.get(message.guild.id);
 
         if(!serverQueue){
             const queueContruct = {
@@ -99,7 +107,7 @@ module.exports = {
             }
         } else {
             serverQueue.songs.push(song);
-            message.channel.send(`**${songInfo.videoDetails.title}** adicionado a fila!`);
+            message.channel.send(`**${songInfo.title}** adicionado a fila!`);
         }
 
         async function play(guild, song) {
@@ -120,7 +128,7 @@ module.exports = {
             .on("error", error => console.error(error));
 
             dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-            serverQueue.textChannel.send(`Começando a tocar: **${song.title}**`);
+            serverQueue.textChannel.send(`:notes: Tocando agora: **${song.title}**`);
         }
         
 

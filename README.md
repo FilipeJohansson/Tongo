@@ -17,7 +17,7 @@ https://discord.com/oauth2/authorize?client_id=794623908300980254&scope=bot
 ## Comandos:
 
 ### Musica:
-Tongo!music play http://URL.com
+Tongo!music play \[YT URL]
 
 Tongo!music pause
 
