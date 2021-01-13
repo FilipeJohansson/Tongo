@@ -2,7 +2,8 @@ module.exports = {
 	name: 'resume',
     description: 'Volta a tocar a música pausada.',
     args: false,
-    guildOnly: true,
+	guildOnly: true,
+	aliases: ['tocar', 'retomar'],
 	async execute(message, args) {
 		const channelVoice = message.member.voice.channel;
 		const serverQueue = message.client.queue.get(message.guild.id);

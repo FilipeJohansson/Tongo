@@ -3,6 +3,7 @@ module.exports = {
     description: 'Para de tocar música.',
     args: false,
     guildOnly: true,
+    aliases: ['parar', 'sair', 'desconectar'],
 	async execute(message, args) {
         const channelVoice = message.member.voice.channel;
         const serverQueue = message.client.queue.get(message.guild.id);

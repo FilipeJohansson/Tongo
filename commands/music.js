@@ -18,6 +18,7 @@ module.exports = {
     args: true,
     guildOnly: true,
     usage: ['play [YT_URL/nome da música]', 'pause', 'resume', 'next', 'stop', 'queue', 'np'],
+    aliases:['musica'],
 	async execute(message, args) {
         // message.content = Tongo!music play URL
         // args = [play, URL]

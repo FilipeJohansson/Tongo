@@ -1,8 +1,9 @@
 module.exports = {
 	name: 'next',
-    description: 'Passa para a próxima música.',
+    description: 'Passa para a próxima música da lista.',
     args: false,
     guildOnly: true,
+    aliases: ['prox', 'proxima', 'proximo'],
 	async execute(message, args) {
         const channelVoice = message.member.voice.channel;
         const serverQueue = message.client.queue.get(message.guild.id);

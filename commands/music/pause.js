@@ -1,8 +1,9 @@
 module.exports = {
 	name: 'pause',
-    description: 'Pausa a música.',
+    description: 'Pausa a música que está tocando.',
     args: false,
-    guildOnly: true,
+	guildOnly: true,
+	aliases: ['pausar', 'pausa'],
 	async execute(message, args) {
 		const channelVoice = message.member.voice.channel;
 		const serverQueue = message.client.queue.get(message.guild.id);

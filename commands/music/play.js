@@ -5,10 +5,11 @@ const yts = require("yt-search");
 
 module.exports = {
     name: 'play',
-    description: 'Toca a música.',
+    description: 'Procura uma música e adiciona na fila.',
     args: true,
     guildOnly: true,
-    usage: ['[YT_URL/nome da música]'],
+    usage: ['[YT URL/Nome da Música]'],
+    aliases: ['tocar'],
 	async execute(message, args) {
         //Achar o canal de voz:
         const channelVoice = message.member.voice.channel;
