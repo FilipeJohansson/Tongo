@@ -4,7 +4,7 @@ module.exports = {
     args: false,
     guildOnly: true,
 	async execute(message, args) {
-        const channelVoice = message.member.voice;
+        const channelVoice = message.member.voice.channel;
         const serverQueue = message.client.queue.get(message.guild.id);
 
         if (!channelVoice) 
