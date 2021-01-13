@@ -38,12 +38,12 @@ module.exports = {
         let songInfo = null;
         let song = null;
 
-        if (url.match(/^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi)) {
+        if (url.match(/^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/)) {
             try {
                 songInfo = await ytdl.getInfo(url);
 
                 if(!songInfo)
-                    return message.channel.send("Não consegui achar o link enviado");
+                    return message.channel.send("Não consegui achar nenhuma música.");
 
                 song = {
                     title: songInfo.videoDetails.title,
@@ -55,14 +55,18 @@ module.exports = {
             }
             
         } else {
+            if(url.match(/^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/))
+                return message.reply("você precisa enviar um link do YouTube");
+
             try {
                 message.channel.send(`:mag_right:  Procurando: **${searchString}**`);
 
                 const searchedVideos = await yts.search(searchString);
+
+                console.log(searchedVideos);
+
                 if(searchedVideos.videos.length === 0)
                     return message.channel.send("Não consegui achar esta música no YouTube");
-
-                    //console.log(searchedVideos);
 
                 songInfo = searchedVideos.videos[0];
 
