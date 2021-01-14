@@ -1,5 +1,6 @@
 const { Util } = require("discord.js");
 
+const ytdl = require('ytdl-core');
 const yts = require("yt-search");
 
 module.exports = {
@@ -18,9 +19,14 @@ module.exports = {
             return message.reply("Você precisa estar em um canal de voz para usar esse comando");
         //console.log(channelVoice);
 
-        if(serverQueue)
+        if(serverQueue) {
+            console.log(serverQueue.songs.length);
+            if(serverQueue.songs.length > 14)
+            return message.reply("o limite da fila são 15 músicas.");
+
             if(serverQueue.channelVoice != channelVoice)
                 return message.reply("você está em um canal de voz diferente!");
+        }
         
         //Ter acesso ao canal
         const permission = channelVoice.permissionsFor(message.client.user);
