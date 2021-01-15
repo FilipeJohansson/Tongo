@@ -5,7 +5,7 @@ module.exports = {
     description: 'Mostra a música que está tocando.',
     args: false,
     guildOnly: true,
-    aliases: ['tocandoagora', 'ta'],
+    aliases: ['tocandoagora', 'ta', 'nowplaying'],
 	async execute(message, args) {
         const serverQueue = message.client.queue.get(message.guild.id);
 

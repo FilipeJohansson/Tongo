@@ -20,7 +20,6 @@ module.exports = {
         //console.log(channelVoice);
 
         if(serverQueue) {
-            console.log(serverQueue.songs.length);
             if(serverQueue.songs.length > 14)
             return message.reply("o limite da fila são 15 músicas.");
 
