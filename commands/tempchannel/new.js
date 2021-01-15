@@ -58,6 +58,7 @@ module.exports = {
                             tempChannelMap: tempChannel,
                         })
                         newData.save().catch(err => console.log(err));
+                        
                     });
 
                     return message.channel.send(`A categoria de canais temporários ${tempChannelId} foi criada.`); 
