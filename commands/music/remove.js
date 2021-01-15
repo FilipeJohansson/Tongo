@@ -1,8 +1,9 @@
 module.exports = {
 	name: 'remove',
     description: 'Remove uma música da lista.',
-    args: false,
+    args: true,
     guildOnly: true,
+    usage: ['[número da música na lista]'],
     aliases: ['remover'],
 	async execute(message, args) {
         const channelVoice = message.member.voice.channel;
