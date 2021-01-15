@@ -4,9 +4,9 @@ const Discord = require('discord.js');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+client.musicsQueue = new Discord.Collection();
+client.tempChannels = new Discord.Collection();
 
-client.queue = new Map();
-client.tempChannels = new Map();
 client.allowTempChannel = true;
 
 const welcome = require('./welcome');
@@ -45,4 +45,5 @@ process.on('unhandledRejection', error => {
 	console.error('Unhandled promise rejection:', error);
 });
 
+// --> PASSING BOT TOKEN
 client.login(process.env.BOTTOKEN);

@@ -7,7 +7,7 @@ module.exports = {
     aliases: ['remover'],
 	async execute(message, args) {
         const channelVoice = message.member.voice.channel;
-        const serverQueue = message.client.queue.get(message.guild.id);
+        const serverQueue = message.client.musicsQueue.get(message.guild.id);
 
         if (!channelVoice) 
             return message.channel.send('Você precisa estar em um canal de voz para usar esse comando');

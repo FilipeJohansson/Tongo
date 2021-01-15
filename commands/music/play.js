@@ -13,7 +13,7 @@ module.exports = {
 	async execute(message, args) {
         //Achar o canal de voz:
         const channelVoice = message.member.voice.channel;
-        const serverQueue = message.client.queue.get(message.guild.id);
+        const serverQueue = message.client.musicsQueue.get(message.guild.id);
 
         if(!channelVoice)
             return message.reply("Você precisa estar em um canal de voz para usar esse comando");
@@ -100,7 +100,7 @@ module.exports = {
                 playing: true
             };
 
-            message.client.queue.set(message.guild.id, queueContruct);
+            message.client.musicsQueue.set(message.guild.id, queueContruct);
 
             queueContruct.songs.push(song);
 
@@ -116,7 +116,7 @@ module.exports = {
 
             } catch (err) {
                 console.log(err);
-                message.client.queue.delete(message.guild.id);
+                message.client.musicsQueue.delete(message.guild.id);
                 return message.channel.send("Não foi possível tocar");
             }
         } else {
@@ -125,11 +125,11 @@ module.exports = {
         }
 
         async function play(guild, song) {
-            const serverQueue = message.client.queue.get(guild.id);
+            const serverQueue = message.client.musicsQueue.get(guild.id);
         
             if (!song) {
               serverQueue.channelVoice.leave();
-              message.client.queue.delete(guild.id);
+              message.client.musicsQueue.delete(guild.id);
               return;
             }
         

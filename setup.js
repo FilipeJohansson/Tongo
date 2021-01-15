@@ -22,5 +22,5 @@ module.exports = async (client) => {
             client.allowTempChannel = data.allowTempChannel;
         }
     });
-
+    
 }

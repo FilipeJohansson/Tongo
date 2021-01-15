@@ -7,7 +7,7 @@ module.exports = {
     guildOnly: true,
     aliases: ['fila', 'lista', 'listar', 'list'],
 	async execute(message, args) {
-        const serverQueue = message.client.queue.get(message.guild.id);
+        const serverQueue = message.client.musicsQueue.get(message.guild.id);
 
         if (!serverQueue) 
             return message.channel.send('Não há nenhuma música tocando.');

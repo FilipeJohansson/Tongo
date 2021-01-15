@@ -6,7 +6,7 @@ module.exports = {
 	aliases: ['pausar', 'pausa'],
 	async execute(message, args) {
 		const channelVoice = message.member.voice.channel;
-		const serverQueue = message.client.queue.get(message.guild.id);
+		const serverQueue = message.client.musicsQueue.get(message.guild.id);
 		
 		if(serverQueue)
             if(serverQueue.channelVoice != channelVoice)
