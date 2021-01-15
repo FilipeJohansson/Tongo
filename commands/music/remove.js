@@ -32,13 +32,15 @@ module.exports = {
         if(musicToRemove > (serverQueue.songs.length))
             return message.reply("você digitou um número fora da lista!");
 
-        const index = parseInt(musicToRemove);
+        var index = parseInt(musicToRemove);
 
         if(!Number.isInteger(index))
             return message.reply("você precisa digitar um número!");
 
+        index--;
+
         try {
-            if(index == 1) {
+            if(index == 0) {
                 if (!serverQueue.playing) {
                     await serverQueue.connection.dispatcher.resume();
                     serverQueue.connection.dispatcher.end();
@@ -46,7 +48,7 @@ module.exports = {
                 
                 serverQueue.connection.dispatcher.end();
             } else {
-                serverQueue.songs.splice(index-1, 1);
+                serverQueue.songs.splice(index, 1);
             }
 
             return message.reply("música removida da lista.");
