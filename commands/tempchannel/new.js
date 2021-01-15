@@ -23,7 +23,7 @@ module.exports = {
         }
         // Lista de Maps: client.tempChannels
 
-        let tempChannelId = args[0];
+        let tempChannelId = args[0].toLowerCase();
         let categoryId = null;
         let voiceId = null;
 

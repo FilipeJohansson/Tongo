@@ -9,25 +9,32 @@ mongoose.connect(process.env.MONGOPASS, {
 });
 
 // Models
-const Data = require("./models/data.js");
-const TempChannels = require("./models/tempchannels.js");
+const AllowTempChannelsData = require("./models/data.js");
+const TempChannelsData = require("./models/tempchannels.js");
 
 module.exports = async (client) => {
-    // --> Pull botToken from Mongo
+    // --> Pull allow temp channel from Mongo
     const botToken = process.env.BOTTOKEN.toString();
 
-    Data.findOne({
+    AllowTempChannelsData.findOne({
         botToken: botToken,
     }, (err, data) => {
-        if(err) console.log(err);
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);        
+
+        if(err) console.error(`\n[${today.toUTCString()}] Allow Temp Channel Error: ` + err);
         if(data) {
             client.allowTempChannel = data.allowTempChannel;
+            console.log(`\n[${today.toUTCString()}] Allow Temp Channel Defined: ` + client.allowTempChannel);
         }
     });
 
     // --> Pull all Temp Channels from Mongo
-    TempChannels.find({}, (err, data) => {
-        if(err) console.log(err);
+    TempChannelsData.find({}, (err, data) => {
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);
+
+        if(err) console.error(`\n[${today.toUTCString()}] Temp Channels Error: ` + err);
         if(data) {
             for (const channel of data) {
                 const tempChannelMap = channel.tempChannelMap;
@@ -38,9 +45,12 @@ module.exports = async (client) => {
                 };
     
                 client.tempChannels.set(channel.tempChannelId, tempChannelConstruct);
-            }            
+            }
+            
+            console.log(`\n[${today.toUTCString()}] Temp Channels Defined:`);
+            console.log(client.tempChannels);
+            
         }
     });
-
 
 }

@@ -14,7 +14,9 @@ const setup = require('./setup');
 const commandHandler = require('./commands');
 
 client.on('ready', () => {
-    console.log("Conectado");
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    console.log(`[${today.toUTCString()}] Conectado`);
     
     // Setting up bot
     setup(client);
@@ -24,11 +26,15 @@ client.on('ready', () => {
 });
 
 client.once('reconnecting', () => {
-	console.log('Reconectando');
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+	console.log(`[${today.toUTCString()}] Reconectando`);
 });
 
 client.once('disconnect', () => {
-	console.log('Desconectado');
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+	console.log(`[${today.toUTCString()}] Desconectado`);
 });
 
 // --> On message
@@ -38,11 +44,15 @@ client.on('message', commandHandler);
 
 // --> ERRORS TRACKING
 client.on('shardError', error => {
-    console.error('A websocket connection encountered an error:', error);
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    console.error(`[${today.toUTCString()}] A websocket connection encountered an error: `, error);
 });
 
 process.on('unhandledRejection', error => {
-	console.error('Unhandled promise rejection:', error);
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+	console.error(`[${today.toUTCString()}] Unhandled promise rejection: `, error);
 });
 
 // --> PASSING BOT TOKEN

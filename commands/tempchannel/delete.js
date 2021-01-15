@@ -23,7 +23,7 @@ module.exports = {
         if(!message.client.tempChannels.size) 
             return message.reply("não existe nenhum canal temporário.");
 
-        let tempChannel = args[0];
+        let tempChannel = args[0].toLowerCase();
 
         if(!message.client.tempChannels.get(tempChannel))
             return message.reply("não existe nenhum canal temporário com este apelido.");
@@ -49,10 +49,15 @@ module.exports = {
                         const fetchedCategory = message.guild.channels.cache.get(categoryId);
                         const fetchedVoice = message.guild.channels.cache.get(voiceId);
 
-                        fetchedCategory.delete();
-                        fetchedVoice.delete();
+                        try {
+                            fetchedCategory.delete();
+                            fetchedVoice.delete();
 
-                        message.client.tempChannels.delete(tempChannel);
+                            message.client.tempChannels.delete(tempChannel);
+                        } catch (error) {
+                            console.error(error);
+                            return message.channel.send(`Erro ao deletar o canal temporário.`);
+                        }
                     }
                 });
 
