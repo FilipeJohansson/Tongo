@@ -37,14 +37,16 @@ module.exports = async (client) => {
         if(err) console.error(`\n[${today.toUTCString()}] Temp Channels Error: ` + err);
         if(data) {
             for (const channel of data) {
+                const tempChannelId = channel.tempChannelId;
                 const tempChannelMap = channel.tempChannelMap;
 
                 const tempChannelConstruct = {
+                    tempChannelId: tempChannelMap.get('tempChannelId'),
                     categoryId: tempChannelMap.get('categoryId'),
                     voiceId: tempChannelMap.get('voiceId'),
                 };
     
-                client.tempChannels.set(channel.tempChannelId, tempChannelConstruct);
+                client.tempChannels.set(tempChannelId, tempChannelConstruct);
             }
             
             console.log(`\n[${today.toUTCString()}] Temp Channels Defined:`);

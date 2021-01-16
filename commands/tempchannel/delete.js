@@ -16,6 +16,7 @@ module.exports = {
     args: true,
     guildOnly: true,
     usage: ["[apelido da categoria]"],
+    aliases: ["deletar", "remover", "remove"],
     permissions: 'ADMINISTRATOR',
 	async execute(message, args) {
         // Lista de Maps: client.tempChannels
@@ -23,7 +24,7 @@ module.exports = {
         if(!message.client.tempChannels.size) 
             return message.reply("não existe nenhum canal temporário.");
 
-        let tempChannel = args[0].toLowerCase();
+        let tempChannel = args[0].toUpperCase();
 
         if(!message.client.tempChannels.get(tempChannel))
             return message.reply("não existe nenhum canal temporário com este apelido.");

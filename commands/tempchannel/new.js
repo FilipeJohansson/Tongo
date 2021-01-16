@@ -23,7 +23,8 @@ module.exports = {
         }
         // Lista de Maps: client.tempChannels
 
-        let tempChannelId = args[0].toLowerCase();
+        let tempChannelId = args[0].toUpperCase();
+        let tempChannelName = args[0].toString();
         let categoryId = null;
         let voiceId = null;
 
@@ -45,6 +46,7 @@ module.exports = {
                         voiceId = channel.id;
 
                         const tempChannelConstruct = {
+                            tempChannelId: tempChannelName,
                             categoryId: categoryId,
                             voiceId: voiceId,
                         };
@@ -61,11 +63,11 @@ module.exports = {
                         
                     });
 
-                    return message.channel.send(`A categoria de canais temporários ${tempChannelId} foi criada.`); 
+                    return message.channel.send(`A categoria de canais temporários ${tempChannelName} foi criada.`); 
                 });
 
             } else {
-                return message.channel.send(`Já existe uma categoria chamada ${tempChannelId}.`);
+                return message.channel.send(`Já existe uma categoria chamada ${tempChannelName}.`);
             }
 
         });
