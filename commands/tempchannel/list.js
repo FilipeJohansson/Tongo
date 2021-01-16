@@ -4,6 +4,7 @@ module.exports = {
 	name: 'list',
     description: 'Listas as categorias de canais temporários.',
     guildOnly: true,
+    aliases: ["lista", "listar"],
     permissions: 'ADMINISTRATOR',
 	async execute(message, args) {
         // Lista de Maps: client.tempChannels
