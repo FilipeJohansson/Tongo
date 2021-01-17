@@ -12,6 +12,7 @@ client.allowTempChannel = true;
 const welcome = require('./welcome');
 const setup = require('./setup');
 const commandHandler = require('./commands');
+const voiceStateUpdate = require('./voiceStateUpdate');
 
 client.on('ready', () => {
     const timeElapsed = Date.now();
@@ -41,6 +42,8 @@ client.once('disconnect', () => {
 client.on('message', commandHandler);
 
 //client.on('guildMemberAdd', guildMemberAddHandler);
+
+client.on('voiceStateUpdate', voiceStateUpdate);
 
 // --> ERRORS TRACKING
 client.on('shardError', error => {

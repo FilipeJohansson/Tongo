@@ -25,7 +25,7 @@ module.exports = async (client) => {
         if(err) console.error(`\n[${today.toUTCString()}] Allow Temp Channel Error: ` + err);
         if(data) {
             client.allowTempChannel = data.allowTempChannel;
-            console.log(`\n[${today.toUTCString()}] Allow Temp Channel Defined: ` + client.allowTempChannel);
+            //console.log(`\n[${today.toUTCString()}] Allow Temp Channel Defined: ` + client.allowTempChannel);
         }
     });
 
@@ -49,8 +49,8 @@ module.exports = async (client) => {
                 client.tempChannels.set(tempChannelId, tempChannelConstruct);
             }
             
-            console.log(`\n[${today.toUTCString()}] Temp Channels Defined:`);
-            console.log(client.tempChannels);
+            //console.log(`\n[${today.toUTCString()}] Temp Channels Defined:`);
+            //console.log(client.tempChannels);
             
         }
     });
