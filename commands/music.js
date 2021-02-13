@@ -18,6 +18,7 @@ module.exports = {
     args: true,
     guildOnly: true,
     usage: ['play [YT_URL/nome da música]', 'pause', 'resume', 'next', 'stop', 'queue', 'np'],
+    aliases:['musica'],
 	async execute(message, args) {
         // message.content = Tongo!music play URL
         // args = [play, URL]
@@ -29,7 +30,7 @@ module.exports = {
         const subCommand = subCommands.get(subCommandName) 
         || subCommands.find(cmd => cmd.aliases && cmd.aliases.includes(subCommandName));
     
-        if (!subCommand) return message.reply(`O uso apropriado deve ser: \`${subCommand.usage.join(', ')}\``);;
+        if (!subCommand) return message.reply("este comando não existe, use o comando `help`.");
 
         // nem todos subCommands precisam de argumento
         if(subCommand.args){

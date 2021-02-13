@@ -3,14 +3,19 @@ module.exports = {
     description: 'Para de tocar música.',
     args: false,
     guildOnly: true,
+    aliases: ['parar', 'sair', 'desconectar'],
 	async execute(message, args) {
-        const channelVoice = message.member.voice;
+        const channelVoice = message.member.voice.channel;
+        const serverQueue = message.client.musicsQueue.get(message.guild.id);
+
         if (!channelVoice) 
             return message.channel.send('Você precisa estar em um canal de voz para usar esse comando');
-
-		const serverQueue = message.client.queue.get(message.guild.id);
+        
         if (!serverQueue) 
             return message.channel.send('Não há nenhuma música tocando.');
+
+        if(serverQueue.channelVoice != channelVoice)
+            return message.reply("você está em um canal de voz diferente!");
         
 		serverQueue.songs = [];
         serverQueue.connection.dispatcher.end();
