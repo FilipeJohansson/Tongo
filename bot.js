@@ -14,7 +14,7 @@ client.queue = new Map();
 client.tempChannels = new Map();
 client.allowTempChannel = true;
 
-const welcome = require('./welcome');
+const welcome = require('./welcome.js');
 const setup = require('./setup.js');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -27,8 +27,6 @@ client.on('ready', () => {
     // Welcomer listenner 
     welcome(client);
 });
-
-//Mas que caraio, o bagulho não tava com meu e-mail
 
 client.once('reconnecting', () => {
 	console.log('Reconectando');
