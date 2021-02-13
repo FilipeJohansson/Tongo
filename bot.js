@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+const fs = require('fs');
+
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
@@ -11,10 +13,6 @@ client.allowTempChannel = true;
 
 const welcome = require('./welcome.js');
 const setup = require('./setup.js');
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-const welcome = require('./welcome');
-const setup = require('./setup');
 const commandHandler = require('./commands');
 const voiceStateUpdate = require('./voiceStateUpdate');
 
